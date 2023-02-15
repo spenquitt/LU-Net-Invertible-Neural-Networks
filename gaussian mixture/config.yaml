@@ -1,0 +1,40 @@
+# -----------------------------------------------------------
+# training settings
+# -----------------------------------------------------------
+
+batch_size: 128
+num_epochs: 50
+learning_rate: 1.0   
+gamma: 0.9     
+random_seed: 14  
+data: Gaussian
+train_or_test: test   # choose between train or test
+no_cuda: False
+save_model: True
+checkpoints_dir: ./checkpoints/
+checkpoint_number: 1
+
+# -----------------------------------------------------------
+# model settings
+# -----------------------------------------------------------
+
+model: LUNet  # choose from [BaseNet, LUNet]
+
+LUNet:
+  _target_: model.LUNet
+  num_lu_blocks: 12
+  layer_size: 2
+
+# -----------------------------------------------------------
+# hydra settings                                       
+# uncomment all the following to fully disable logging 
+# -----------------------------------------------------------
+
+defaults:
+  - _self_
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+hydra:
+  output_subdir: null
+  run:
+    dir: .
