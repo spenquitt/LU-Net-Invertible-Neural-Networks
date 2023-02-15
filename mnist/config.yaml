@@ -1,0 +1,60 @@
+# -----------------------------------------------------------
+# general settings
+# -----------------------------------------------------------
+
+no_cuda: False
+save_model: True
+checkpoints_dir: ./checkpoints/
+outputs_dir: ./outputs/
+num_cores: 4
+
+# -----------------------------------------------------------
+# training settings
+# -----------------------------------------------------------
+
+batch_size: 256
+test_batch_size: 1200
+num_epochs: 80
+learning_rate: 0.6 # param optimizer
+momentum: 0.9 # param optimizer
+step_size: 3  # param scheduler
+gamma: 0.5  # param scheduler
+random_seed: 42
+mnist_target: 0  # choose from [0, 1, ..., 9, All]
+data: FashionMNIST  # choose from {MNIST, FashionMNIST}
+loss_alpha: 100
+
+# -----------------------------------------------------------
+# evaluation settings
+# -----------------------------------------------------------
+
+num_runs: 30
+num_samples: 100
+another_mnist_target: # interpolate to in latent space
+
+# -----------------------------------------------------------
+# model settings
+# -----------------------------------------------------------
+
+model: LUNet
+
+LUNet:
+  _target_: model.LUNet
+  num_lu_blocks: 3
+  layer_size: 784
+
+# -----------------------------------------------------------
+# hydra settings                                       
+# uncomment all the following to fully disable logging 
+# -----------------------------------------------------------
+
+defaults:
+  - _self_
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+  sweep:
+    dir: .
