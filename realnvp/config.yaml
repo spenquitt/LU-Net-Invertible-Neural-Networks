@@ -1,0 +1,17 @@
+dataset: MNIST
+mnist_target: 9
+learning_rate: 0.01
+batch_size: 128
+num_epochs: 60
+num_coupling: 6
+num_final_coupling: 2
+num_planes: 64
+step_size: 6
+gamma: 0.5
+checkpoint_dir: ./checkpoints
+outputs_dir: ./outputs
+save_model: False
+num_runs: 1
+random_seed: 42
+num_samples: 64
+num_cores: 4
